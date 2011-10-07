@@ -19,6 +19,30 @@ module Disqussion
       response = post('threads/close', options)
     end
     
+    # Create new thread
+    # @accessibility: public key, secret key
+    # @methods: POST
+    # @format: json, jsonp
+    # @authenticated: true
+    # @limited: false
+    # @param options [Hash] A customizable set of options.
+    # @return [Hashie::Rash] Information about created thread.
+    # @option options [String]  :forum.     Looks up a forum by ID (aka short name), required
+    # @option options [String]  :title,     required
+    # @option options [Integer] :category,  Defaults to null, Looks up a category by ID
+    # @option options [String]  :url,       Defaults to null, URL (defined by RFC 3986), Maximum length of 500
+    # @option options [Integer] :date.      Defaults to null, Unix timestamp (or ISO datetime standard)
+    # @option options [String]  :message    Defaults to null
+    # @option options [String]  :identifier Defaults to null, Maximum length 300
+    # @option options [String]  :slug       Defaults to null, Alpha-numeric slug, Maximum length of 200
+    # @example Closes thread 12345678
+    #   Disqussion::Client.threads.close(12345678)
+    # @see: http://disqus.com/api/3.0/threads/close.json
+    def create(*args)
+      options = args.last.is_a?(Hash) ? args.pop : {}
+      response = post('threads/create', options)
+    end
+    
     # Returns thread details.
     # @accessibility: public key, secret key
     # @methods: GET
